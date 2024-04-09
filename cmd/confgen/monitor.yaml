@@ -1,0 +1,7 @@
+monitor:
+  - name: ConectaFacensMonitoring
+    hosts: conecta_facens
+    taks:
+      - name: Check Disk
+        command: df -hT
+        register: disk_memory

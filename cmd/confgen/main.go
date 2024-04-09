@@ -8,6 +8,8 @@ import (
 func main() {
 	//updates := datainput.CreateUpdate()
 	//ansiblecli.UpdatePlaybook(&updates)
-	inventory := datainput.CreateInventory()
-	ansiblecli.Inventory(&inventory)
+	//inventory := datainput.CreateInventory()
+	//ansiblecli.Inventory(&inventory)
+	monitor := datainput.CreateMonitor()
+	ansiblecli.MonitorPlaybook(&monitor)
 }

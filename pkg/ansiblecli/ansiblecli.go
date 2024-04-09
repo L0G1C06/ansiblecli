@@ -51,6 +51,26 @@ func Inventory(inventory *config.Inventory){
 	println("inventory.yaml created successfully")
 }
 
+func MonitorPlaybook(monitor *config.Monitoring){
+	var b bytes.Buffer 
+	yamlEncoder := yaml.NewEncoder(&b)
+	yamlEncoder.SetIndent(1)
+
+	err := yamlEncoder.Encode(&monitor)
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	yamlData := b.Bytes()
+	
+	err = os.WriteFile("monitor.yaml", yamlData, 0644)
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	println("monitor.yaml created successfully") 
+}
+
 func regexPlaybook(yamlData []byte) []byte {
 	yamlData = bytes.Replace(yamlData, []byte("updates:\n"), []byte{}, 1)
 	yamlData = bytes.Replace(yamlData, []byte("  - name:"), []byte("- name:"), -1)

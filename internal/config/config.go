@@ -43,5 +43,15 @@ type Inventory struct {
 			AnsibleUser             string `yaml:"ansible_user"`
 			AnsibleSSHPrivateKeyFile string `yaml:"ansible_ssh_private_key_file"`
 		} `yaml:"hosts"`
-	} `yaml:"jenkins_hosts"`
+	} `yaml:"-"`
+}
+
+type MonitoringConfigs struct {
+	Name string `yaml:"name,omitempty"`
+	Hosts string `yaml:"hosts,omitempty"`
+	Tasks []TaskConfig `yaml:"taks,omitempty"`
+}
+
+type Monitoring struct {
+	Monitor []MonitoringConfigs
 }
