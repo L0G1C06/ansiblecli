@@ -28,7 +28,27 @@ func UpdatePlaybook(update *config.Update) {
 		log.Fatal(err)
 	}
 
-	println("YAML file created successfully!")
+	println("updatePlaybook.yaml created successfully!")
+}
+
+func Inventory(inventory *config.Inventory){
+	var b bytes.Buffer 
+	yamlEncoder := yaml.NewEncoder(&b)
+	yamlEncoder.SetIndent(1)
+
+	err := yamlEncoder.Encode(&inventory)
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	yamlData := b.Bytes()
+	
+	err = os.WriteFile("inventory.yaml", yamlData, 0644)
+	if err != nil{
+		log.Fatal(err)
+	}
+
+	println("inventory.yaml created successfully")
 }
 
 func regexPlaybook(yamlData []byte) []byte {

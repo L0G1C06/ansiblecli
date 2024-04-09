@@ -1,13 +1,15 @@
 package config
 
-type DiscordNotifier struct{
+type DiscordNotifier struct {
 	ID string `yaml:"webhook_id,omitempty"`
 	Token string `yaml:"webhook_token,omitempty"`
 	Content string `yaml:"content,omitempty"`
 }
+
 type DebugConfig struct {
 	Msg string `yaml:"msg,omitempty"`
 }
+
 type Fact struct {
 	IsCentOS string `yaml:"is_centos,omitempty"`
 	IsUbuntu string `yaml:"is_ubuntu,omitempty"`
@@ -24,7 +26,6 @@ type TaskConfig struct {
 	DiscordMessage []DiscordNotifier `yaml:"community.general.discord,omitempty"`
 }
 
-// Playbook structs
 type UpdateConfigs struct {
 	Name  string `yaml:"name,omitempty"`
 	Hosts string `yaml:"hosts,omitempty"`
@@ -33,4 +34,14 @@ type UpdateConfigs struct {
 
 type Update struct {
 	Updates []UpdateConfigs
+}
+
+type Inventory struct {
+	HostGroupName struct {
+		Hosts map[string]struct {
+			AnsibleConnection       string `yaml:"ansible_connection"`
+			AnsibleUser             string `yaml:"ansible_user"`
+			AnsibleSSHPrivateKeyFile string `yaml:"ansible_ssh_private_key_file"`
+		} `yaml:"hosts"`
+	} `yaml:"jenkins_hosts"`
 }
