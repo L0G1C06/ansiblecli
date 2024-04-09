@@ -21,10 +21,7 @@ func UpdatePlaybook(update *config.Update) {
 	}
 
 	yamlData := b.Bytes()
-	yamlData = bytes.Replace(yamlData, []byte("updates:\n"), []byte{}, 1)
-	yamlData = bytes.Replace(yamlData, []byte("  - name:"), []byte("- name:"), -1)
-	yamlData = bytes.Replace(yamlData, []byte("  - "), []byte("- "), -1)
-	yamlData = bytes.Replace(yamlData, []byte("   "), []byte(" "), -1)
+	yamlData = regexPlaybook(yamlData)
 
 	err = os.WriteFile("updatePlaybook.yaml", yamlData, 0644)
 	if err != nil {
@@ -32,4 +29,16 @@ func UpdatePlaybook(update *config.Update) {
 	}
 
 	println("YAML file created successfully!")
+}
+
+func regexPlaybook(yamlData []byte) []byte {
+	yamlData = bytes.Replace(yamlData, []byte("updates:\n"), []byte{}, 1)
+	yamlData = bytes.Replace(yamlData, []byte("  - name:"), []byte("- name:"), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  - "), []byte("- "), -1)
+	yamlData = bytes.Replace(yamlData, []byte("   "), []byte(" "), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  - is_centos:"), []byte("    is_centos:"), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  - is_ubuntu:"), []byte("    is_ubuntu:"), -1)
+	yamlData = bytes.Replace(yamlData, []byte(`'centos'`), []byte("'centos'"), -1)
+	yamlData = bytes.Replace(yamlData, []byte(`'ubuntu'`), []byte("'ubuntu'"), -1)
+	return yamlData
 }
