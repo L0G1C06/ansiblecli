@@ -1,8 +1,8 @@
 package main
 
 import (
-	"confgen/internal/config"
-	"confgen/pkg/ansiblecli"
+	"github.com/L0G1C06/ansiblecli/internal/config"
+	"github.com/L0G1C06/ansiblecli/pkg/ansiblecli"
 )
 
 func main() {
