@@ -1,0 +1,34 @@
+- name: updateJenkinsMachinesPlaybook
+  hosts: jenkins_hosts
+  tasks:
+    - name: Check if the system is CentOS
+      set_fact: 
+        is_centos: "{{ ansible_distribution | lower == 'centos' }}"
+      ignore_errors: true
+    - name: Check if the system is Ubuntu
+      set_fact: 
+        is_ubuntu: "{{ ansible_distribution | lower == 'ubuntu' }}"
+      ignore_errors: true
+    - name: Update CentOS Machines
+      command: sudo dnf update
+      when: is_centos | bool
+    - name: Update Ubuntu Machines
+      command: sudo apt update
+      when: is_ubuntu | bool
+- name: updateConectaFacensMachinePlaybook
+  hosts: conecta_facens
+  tasks: 
+    - name: Check if the system is CentoOS
+      set_fact: 
+        is_centos: "{{ ansible_distribution | lower == 'centos' }}"
+      ignore_errors: true
+    - name: Check if the system is Ubuntu
+      set_fact:
+        is_ubuntu: "{{ ansible_distribution | lower == 'ubuntu' }}"
+      ignore_errors: true 
+    - name: Update CentOS Machines
+      command: sudo dnf update
+      when: is_centos | bool 
+    - name: Update Ubuntu Machines
+      command: sudo apt update
+      when: is_ubuntu | bool
