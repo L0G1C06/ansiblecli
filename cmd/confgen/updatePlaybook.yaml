@@ -3,7 +3,7 @@
   tasks:
   - name: Check if the system is CentOS
     set_fact:
-    - is_centos: '{{ ansible_distribution | lower == ''centos'' }}'
+    - is_centos: '{{ ansible_distribution | lower == ''centos2'' }}'
     ignore_errors: true
   - name: Check if the system is Ubuntu
     set_fact:
