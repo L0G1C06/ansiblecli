@@ -7,23 +7,24 @@ type DiscordNotifier struct {
 }
 
 type DebugConfig struct {
-	Msg string `yaml:"msg,omitempty"`
+	Message string `yaml:"msg,omitempty"`
 }
 
 type Fact struct {
 	IsCentOS string `yaml:"is_centos,omitempty"`
 	IsUbuntu string `yaml:"is_ubuntu,omitempty"`
+	Formatted_metrics string `yaml:"formatted_metrics,omitempty"`
 }
 
 type TaskConfig struct {
 	Name string `yaml:"name,omitempty"`
 	Command string `yaml:"command,omitempty"`
 	Register string `yaml:"register,omitempty"`
-	When string `yaml:"when,omitempty"`
 	Set_fact []Fact `yaml:"set_fact,omitempty"`
 	IgnoreErrors bool `yaml:"ignore_errors,omitempty"`
 	Debug []DebugConfig `yaml:"debug,omitempty"`
 	DiscordMessage []DiscordNotifier `yaml:"community.general.discord,omitempty"`
+	When string `yaml:"when,omitempty"`
 }
 
 type UpdateConfigs struct {
@@ -49,7 +50,7 @@ type Inventory struct {
 type MonitoringConfigs struct {
 	Name string `yaml:"name,omitempty"`
 	Hosts string `yaml:"hosts,omitempty"`
-	Tasks []TaskConfig `yaml:"taks,omitempty"`
+	Tasks []TaskConfig `yaml:"tasks,omitempty"`
 }
 
 type Monitoring struct {

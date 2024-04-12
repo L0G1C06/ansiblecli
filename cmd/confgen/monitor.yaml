@@ -1,7 +1,22 @@
-monitor:
-  - name: ConectaFacensMonitoring
-    hosts: conecta_facens
-    taks:
-      - name: Check Disk
-        command: df -hT
-        register: disk_memory
+- name: ConectaFacensMonitoring
+  hosts: conecta_facens
+  tasks:
+  - name: Check Disk
+    command: df -hT
+    register: disk_memory
+  - name: Format DIsk Metrics
+    set_fact:
+      formatted_metrics: '{% for line in disk_memory.stdout_lines[1:] %} {{ line.split()[5] }}{mount="{{ line.split()[6] }}"} {{ line.split()[1] | regex_replace(''G'', '''') | float}}'
+  - name: Print Disk Metrics
+    debug:
+      msg: '{{ disk_memory.stdout_lines[1].split()[5] | int}}'
+  - name: Send Alert
+    community.general.discord:
+      webhook_id: "1074673299025563679"
+      webhook_token: 58l-x7AW4EPEUxjvIbqVpoTfEHA4coVJKYTTsYBQSUjpMq0vHJ15oPvZCMzKW0jeO49L
+      content: Your service is using more than 95% of the disk
+    when: disk_memory.stdout_lines[1].split()[5] | int >= 95
+  - name: Print normal disk size
+    debug:
+      msg: 'Disk is not full. Disk usage: {{ disk_memory.stdout_lines[1].split()[5] }}'
+    when: disk_memory.stdout_lines[1].split()[5] | int < 95

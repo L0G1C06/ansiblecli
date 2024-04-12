@@ -21,14 +21,14 @@ func UpdatePlaybook(update *config.Update) {
 	}
 
 	yamlData := b.Bytes()
-	yamlData = regexPlaybook(yamlData)
+	yamlData = regexUpdatePlaybook(yamlData)
 
-	err = os.WriteFile("updatePlaybook.yaml", yamlData, 0644)
+	err = os.WriteFile("update.yaml", yamlData, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	println("updatePlaybook.yaml created successfully!")
+	println("update.yaml created successfully!")
 }
 
 func Inventory(inventory *config.Inventory){
@@ -62,6 +62,7 @@ func MonitorPlaybook(monitor *config.Monitoring){
 	}
 
 	yamlData := b.Bytes()
+	yamlData = regexMonitorPlaybook(yamlData)
 	
 	err = os.WriteFile("monitor.yaml", yamlData, 0644)
 	if err != nil{
@@ -71,7 +72,7 @@ func MonitorPlaybook(monitor *config.Monitoring){
 	println("monitor.yaml created successfully") 
 }
 
-func regexPlaybook(yamlData []byte) []byte {
+func regexUpdatePlaybook(yamlData []byte) []byte {
 	yamlData = bytes.Replace(yamlData, []byte("updates:\n"), []byte{}, 1)
 	yamlData = bytes.Replace(yamlData, []byte("  - name:"), []byte("- name:"), -1)
 	yamlData = bytes.Replace(yamlData, []byte("  - "), []byte("- "), -1)
@@ -80,5 +81,18 @@ func regexPlaybook(yamlData []byte) []byte {
 	yamlData = bytes.Replace(yamlData, []byte("  - is_ubuntu:"), []byte("    is_ubuntu:"), -1)
 	yamlData = bytes.Replace(yamlData, []byte(`'centos'`), []byte("'centos'"), -1)
 	yamlData = bytes.Replace(yamlData, []byte(`'ubuntu'`), []byte("'ubuntu'"), -1)
+	return yamlData
+}
+
+func regexMonitorPlaybook(yamlData []byte) []byte {
+	yamlData = bytes.Replace(yamlData, []byte("monitor:\n"), []byte{}, 1)
+	yamlData = bytes.Replace(yamlData, []byte("  - name:"), []byte("- name:"), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  - "), []byte("- "), -1)
+	yamlData = bytes.Replace(yamlData, []byte("   "), []byte(" "), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  - msg:"), []byte("    msg:"), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  - formatted_metrics:"), []byte("    formatted_metrics:"), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  - webhook_id:"), []byte("    webhook_id:"), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  webhook_token:"), []byte("    webhook_token:"), -1)
+	yamlData = bytes.Replace(yamlData, []byte("  content:"), []byte("    content:"), -1)
 	return yamlData
 }
