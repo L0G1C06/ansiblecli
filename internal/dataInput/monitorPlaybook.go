@@ -6,8 +6,8 @@ func CreateMonitor() config.Monitoring{
 	monitor := config.Monitoring{
 		Monitor: []config.MonitoringConfigs{
 			{
-				Name: "ConectaFacensMonitoring",
-				Hosts: "conecta_facens",
+				Name: "MonitoringTask",
+				Hosts: "InventoryHostName",
 				Tasks: []config.TaskConfig{
 					{
 						Name: "Check Disk",
@@ -34,8 +34,8 @@ func CreateMonitor() config.Monitoring{
 						Name: "Send Alert",
 						DiscordMessage: []config.DiscordNotifier{
 							{
-								ID: `1074673299025563679`,
-								Token: `58l-x7AW4EPEUxjvIbqVpoTfEHA4coVJKYTTsYBQSUjpMq0vHJ15oPvZCMzKW0jeO49L`,
+								ID: `DiscordChatID`,
+								Token: `DiscordChatToken`,
 								Content: `Your service is using more than 95% of the disk`,
 							},
 						},

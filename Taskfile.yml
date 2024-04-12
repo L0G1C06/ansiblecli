@@ -1,0 +1,22 @@
+version: "3"
+
+tasks:
+    build:
+        desc: Build the app
+        cmds:
+        - GOFLAGS=-mod=mod go build -o bin/ansiblecli main.go 
+    
+    install:
+        desc: Install the app
+        cmds:
+        - GOFLAHS=-mod=mod go install
+
+    run: 
+        desc: Run the app
+        cmds:
+        - GOFLAGS=-mod=mod go run main.go
+
+    clean:
+        desc: Remove all retrieved *.png files
+        cmds:
+        - rm *.yaml

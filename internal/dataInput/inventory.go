@@ -18,15 +18,15 @@ func CreateInventory() config.Inventory{
 				AnsibleUser             string `yaml:"ansible_user"`
 				AnsibleSSHPrivateKeyFile string `yaml:"ansible_ssh_private_key_file"`
 			}{
-				"jenkins.ligafacens.com": {
-					AnsibleConnection:       "ssh",
-					AnsibleUser:             "ubuntu",
-					AnsibleSSHPrivateKeyFile: "~/.ssh/jenkinsServer",
+				"your-host.com": {
+					AnsibleConnection:       "",
+					AnsibleUser:             "",
+					AnsibleSSHPrivateKeyFile: "",
 				},
-				"jenkins-agent1.ligafacens.com": {
-					AnsibleConnection:       "ssh",
-					AnsibleUser:             "ubuntu",
-					AnsibleSSHPrivateKeyFile: "~/.ssh/jenkinsAgent",
+				"your-host2.com": {
+					AnsibleConnection:       "",
+					AnsibleUser:             "",
+					AnsibleSSHPrivateKeyFile: "",
 				},
 			},
 		},

@@ -8,8 +8,8 @@ func CreateUpdate() config.Update{
 	updates := config.Update{
 		Updates: []config.UpdateConfigs{
 			{
-				Name:  "updateJenkinsMachinesPlaybook",
-				Hosts: "jenkins_hosts",
+				Name:  "updateTask",
+				Hosts: "InventoryHostName",
 				Tasks: []config.TaskConfig{
 					{
 						Name: "Check if the system is CentOS",

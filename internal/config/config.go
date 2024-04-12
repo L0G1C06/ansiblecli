@@ -44,7 +44,7 @@ type Inventory struct {
 			AnsibleUser             string `yaml:"ansible_user"`
 			AnsibleSSHPrivateKeyFile string `yaml:"ansible_ssh_private_key_file"`
 		} `yaml:"hosts"`
-	} `yaml:"-"`
+	} `yaml:"inventory-hostInventoryHostName"`
 }
 
 type MonitoringConfigs struct {
