@@ -1,2 +1,4 @@
 /cmd/confgen/updatePlaybook.yaml
 /cmd/confgen/inventory.yaml
+/bin/*
+binary.zip
