@@ -9,7 +9,7 @@ tasks:
     install:
         desc: Install the app
         cmds:
-        - GOFLAHS=-mod=mod go install
+        - GOFLAGS=-mod=mod go install
 
     run: 
         desc: Run the app
